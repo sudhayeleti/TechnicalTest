@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+    <title>Technical Test</title>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<style>
+	#wrapper {
+	   width:960px;
+	   margin: 50px auto;
+	}
+	#wrapper div { text-align: center; }
+	#wrapper h4 { margin-bottom: 20px; }
+	#venue-results { margin-top: 50px; }
+	</style>
+</head>
+<body>
+  <div id="wrapper">
+     <div id="venue-find">
+        <h4>Please enter location to see the recommended or popular places</h4>
+        <input type="text" name="queryVenue" value="" id="queryValue"/>
+     </div>
+   
+     <div id="venue-results">
+        
+     </div>
+   </div>
+   <script>
+      $('#queryValue').change(function() {
+	     // getting the value from text field
+	     var queryString = document.getElementById("queryValue").value;
+		 //clearing the element if there is an old data
+		 $('#venue-results').html('');
+		 var apiUrl = 'https://api.foursquare.com/v2/venues/search?ll=40.7,-74&query='+queryString+'&client_id=ONNZ0TVVACLT0LMMCA1MAEIHCNE1QRDS3S1CA1FSJIZ45CCS&client_secret=B0NRTIXKLFNESTQFAZ0LIUOHLN4W52GQEFXR5OVAFRXKHZYV&v=20170101';
+		 //Retrieving the data from API using Jquery
+		 $.getJSON(apiUrl, function(data) {
+		   if(data.response.venues.length)
+		   {
+		      $.each(data.response.venues, function(i,venues){
+		        content = '<p>' + venues.name + '</p>';
+			    $(content).appendTo("#venue-results");
+              });
+		    }
+		   else {
+		      $("#venue-results").html("<p>Sorry no results found.</p>");
+		   }
+		 });
+	  });
+  </script>
+</body>
+</html>
+
