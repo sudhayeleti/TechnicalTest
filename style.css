@@ -1,0 +1,18 @@
+/* CSS Document */
+#wrapper {
+	width:600px;
+	margin: 50px auto;
+}
+#wrapper div { 
+    text-align: center; 
+}
+#wrapper h4 { 
+    margin-bottom: 20px; 
+}
+#venue-results { 
+    margin-top: 50px; 
+}
+.red {
+    color: #FF0000;
+}
+
